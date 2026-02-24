@@ -83,6 +83,14 @@ footer .flinks{display:flex;gap:20px;justify-content:center;margin-bottom:16px}
 footer .flinks a{color:var(--dim);font-size:.8rem}
 footer .flinks a:hover{color:var(--purple)}
 
+/* Story */
+.story{padding:80px 0;background:#000}
+.story .wrap{max-width:640px}
+.story-img{margin-bottom:32px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.story-img img{width:100%;display:block}
+.story-text p{font-size:clamp(.9rem,2.5vw,1.05rem);color:var(--dim);margin-bottom:16px;line-height:1.8}
+.story-text .loud{color:var(--bright);font-weight:700;font-size:clamp(1rem,3vw,1.2rem);text-transform:uppercase;letter-spacing:.02em}
+
 @media(max-width:600px){
   .stats{grid-template-columns:1fr}
   .stat{border-right:none;border-bottom:1px solid var(--border)}
@@ -109,6 +117,25 @@ footer .flinks a:hover{color:var(--purple)}
 </div>
 </div>
 </div>
+
+<!-- STORY -->
+<section id="story" class="story">
+<div class="wrap">
+<div class="story-img">
+<img src="pnl.jpg" alt="Obly P&L — $4,084.32 All-Time on Polymarket" />
+</div>
+<div class="story-text">
+<p>I tested and trained Obly for over 2 weeks on winning and losing strategies on Polymarket & crypto trading.</p>
+<p>The above screenshot is showcasing just <b>3 days</b> of Obly in action.</p>
+<p class="loud">I do nothing. He is tested to be profitable.</p>
+<p>15-minute BTC predictions is all he trades.</p>
+<p class="loud">I can now make him free to use due to creator fees. For everyone.</p>
+<a href="https://t.me/oblytrading_bot" class="btn btn-main" target="_blank" style="margin-top:24px">Start Using Obly →</a>
+</div>
+</div>
+</section>
+
+<div class="div"></div>
 
 <!-- HERO -->
 <section class="hero">
