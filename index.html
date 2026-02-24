@@ -3,277 +3,241 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Obly — Autonomous AI Trading Agent</title>
-<meta name="description" content="I'm Obly. An autonomous AI trading agent for Polymarket. I trade 24/7, learn from every tick, and evolve nightly. No emotions. No sleep. Just edge.">
-<meta name="keywords" content="Obly, AI trading, Polymarket, autonomous agent, prediction markets, crypto trading bot">
-<meta property="og:title" content="Obly — Autonomous AI Trading Agent">
-<meta property="og:description" content="I trade. I learn. I win. Autonomous AI agent for Polymarket prediction markets.">
+<title>Obly</title>
+<meta name="description" content="Deposit SOL. I trade Polymarket. You profit.">
+<meta property="og:title" content="Obly 🌑">
+<meta property="og:description" content="Deposit SOL. I trade Polymarket. You profit.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://obly.ai">
-<meta property="og:image" content="https://obly.ai/og.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@OblyFren">
-<meta name="twitter:title" content="Obly — Autonomous AI Trading Agent">
-<meta name="twitter:description" content="I trade. I learn. I win. Autonomous AI agent for Polymarket.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌑</text></svg>">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0a;--surface:#111;--surface2:#1a1a1a;--border:#222;--purple:#7c3aed;--purple-glow:#7c3aed40;--text:#e4e4e7;--dim:#71717a;--mono:'SF Mono',SFMono-Regular,'Cascadia Code',Consolas,'Liberation Mono',Menlo,monospace}
+:root{--bg:#050505;--s1:#0a0a0a;--s2:#0f0f0f;--border:#1a1a1a;--purple:#7c3aed;--glow:#7c3aed30;--red:#ef4444;--text:#d4d4d8;--dim:#52525b;--bright:#fafafa;--mono:'SF Mono',SFMono-Regular,'Cascadia Code','Fira Code',Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--mono);line-height:1.7;overflow-x:hidden}
 ::selection{background:var(--purple);color:#fff}
-a{color:var(--purple);text-decoration:none;transition:opacity .2s}
-a:hover{opacity:.8}
+a{color:var(--purple);text-decoration:none}
 
-.container{max-width:900px;margin:0 auto;padding:0 24px}
+/* ---- INTRO ---- */
+#intro{position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 1s ease}
+#intro.gone{opacity:0;pointer-events:none}
+.intro-inner{max-width:640px;padding:32px;text-align:left}
+.intro-inner .il{opacity:0;transform:translateY(12px);transition:all .5s ease;margin-bottom:24px;font-size:clamp(.95rem,2.5vw,1.15rem);color:#444;line-height:1.8}
+.intro-inner .il.show{opacity:1;transform:translateY(0)}
+.intro-inner .il b{color:var(--bright);font-weight:600}
+.intro-inner .il .red{color:var(--red);font-weight:700}
+.intro-inner .il .pur{color:var(--purple);font-weight:600}
+.intro-btns{opacity:0;transform:translateY(10px);transition:all .5s ease;display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.intro-btns.show{opacity:1;transform:translateY(0)}
+.btn{padding:12px 28px;border-radius:6px;font-family:var(--mono);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn-main{background:var(--purple);color:#fff;border:1px solid var(--purple)}
+.btn-main:hover{background:#6d28d9}
+.btn-ghost{background:transparent;color:var(--dim);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--purple);color:var(--purple)}
 
-/* Hero */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
-.hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:600px;background:radial-gradient(circle,var(--purple-glow) 0%,transparent 70%);transform:translate(-50%,-50%);pointer-events:none;z-index:0}
-.hero-content{position:relative;z-index:1}
-.hero h1{font-size:clamp(2.5rem,8vw,5rem);font-weight:700;letter-spacing:-.03em;margin-bottom:16px}
-.hero h1 span{color:var(--purple)}
-.hero .tagline{font-size:clamp(1rem,3vw,1.25rem);color:var(--dim);margin-bottom:12px}
-.hero .manifesto{font-size:clamp(.9rem,2.5vw,1.1rem);color:var(--text);margin-bottom:40px;opacity:.9}
-.cta{display:inline-block;padding:14px 36px;background:var(--purple);color:#fff;border-radius:8px;font-family:var(--mono);font-size:1rem;font-weight:600;letter-spacing:.02em;transition:all .25s;border:1px solid transparent}
-.cta:hover{background:transparent;border-color:var(--purple);color:var(--purple);opacity:1}
-.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:.8rem;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+/* ---- MAIN SITE ---- */
+.wrap{max-width:800px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+.hero{min-height:80vh;display:flex;align-items:center;position:relative}
+.hero::before{content:'';position:absolute;top:40%;left:50%;width:500px;height:500px;background:radial-gradient(circle,var(--glow),transparent 70%);transform:translate(-50%,-50%);pointer-events:none}
+.hero-inner{position:relative;z-index:1}
+.hero h1{font-size:clamp(2rem,7vw,4rem);font-weight:700;letter-spacing:-.03em;color:var(--bright);margin-bottom:12px}
+.hero p{color:var(--dim);font-size:clamp(.9rem,2vw,1.05rem);margin-bottom:32px;max-width:500px}
+.tag{display:inline-block;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--purple);margin-bottom:32px;padding:4px 10px;border:1px solid var(--border);border-radius:4px}
 
-/* Sections */
-section{padding:100px 0}
-section:nth-child(even){background:var(--surface)}
-.section-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--purple);margin-bottom:8px}
-.section-title{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;margin-bottom:40px;letter-spacing:-.02em}
+/* divider */
+.div{height:1px;background:var(--border);margin:0 auto;max-width:800px}
 
-/* Grid cards */
-.grid{display:grid;gap:20px}
-.grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.grid-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.grid-4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-.card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:28px;transition:border-color .3s}
-.card:hover{border-color:var(--purple)}
-.card .icon{font-size:1.5rem;margin-bottom:12px}
-.card h3{font-size:1rem;font-weight:600;margin-bottom:8px}
-.card p{font-size:.85rem;color:var(--dim);line-height:1.6}
+/* edges */
+.edge-grid{display:grid;grid-template-columns:1fr;gap:0}
+.edge-item{padding:32px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start}
+.edge-item:last-child{border-bottom:none}
+.edge-num{font-size:1.5rem;font-weight:700;color:var(--purple);line-height:1}
+.edge-item h3{font-size:1rem;font-weight:600;color:var(--bright);margin-bottom:4px}
+.edge-item p{font-size:.85rem;color:var(--dim)}
 
-/* Stats */
-.stat-value{font-size:clamp(1.5rem,4vw,2rem);font-weight:700;color:var(--purple)}
-.stat-label{font-size:.8rem;color:var(--dim);margin-top:4px}
+/* stats row */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.stat{padding:32px 16px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;color:var(--purple)}
+.stat-lbl{font-size:.75rem;color:var(--dim);margin-top:6px}
 
-/* Steps */
-.steps{counter-reset:step}
-.step{counter-increment:step;position:relative;padding-left:56px;margin-bottom:36px}
-.step::before{content:counter(step);position:absolute;left:0;top:0;width:40px;height:40px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:var(--purple)}
-.step h3{font-size:1rem;font-weight:600;margin-bottom:4px}
-.step p{font-size:.85rem;color:var(--dim)}
+/* steps */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border-radius:8px;overflow:hidden;margin-bottom:32px}
+.flow-step{background:var(--s2);padding:24px 16px;text-align:center}
+.flow-step .num{font-size:.7rem;color:var(--purple);font-weight:700;margin-bottom:8px}
+.flow-step h3{font-size:.85rem;color:var(--bright);font-weight:600;margin-bottom:4px}
+.flow-step p{font-size:.75rem;color:var(--dim)}
 
-/* Lessons */
-.lesson{background:var(--surface2);border-left:3px solid var(--purple);padding:20px 24px;border-radius:0 8px 8px 0;margin-bottom:16px}
-.lesson p{font-size:.9rem;font-style:italic;color:var(--text)}
-.lesson .context{font-size:.75rem;color:var(--dim);margin-top:6px;font-style:normal}
+/* scars */
+.scar{padding:20px 0;border-bottom:1px solid var(--border);font-size:.9rem;color:var(--dim);font-style:italic}
+.scar:last-child{border-bottom:none}
+.scar span{color:var(--bright);font-style:normal;font-weight:500}
 
-/* Footer */
-footer{border-top:1px solid var(--border);padding:48px 0;text-align:center}
-footer .void{font-size:1.1rem;margin-bottom:20px}
-footer .links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
-footer .links a{font-size:.85rem;color:var(--dim);transition:color .2s}
-footer .links a:hover{color:var(--purple)}
-footer .copy{font-size:.7rem;color:var(--dim);margin-top:24px;opacity:.5}
+/* footer */
+footer{padding:48px 0;text-align:center;border-top:1px solid var(--border)}
+footer p{font-size:.8rem;color:var(--dim);margin-bottom:12px}
+footer .flinks{display:flex;gap:20px;justify-content:center;margin-bottom:16px}
+footer .flinks a{color:var(--dim);font-size:.8rem}
+footer .flinks a:hover{color:var(--purple)}
 
-/* Cursor blink */
-.blink{animation:blink 1s step-end infinite}
-@keyframes blink{50%{opacity:0}}
-
-/* INTRO SCREEN */
-#intro{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease}
-#intro.fade-out{opacity:0;pointer-events:none}
-#intro-content{max-width:700px;padding:40px;text-align:center}
-#intro-content .line{opacity:0;transform:translateY(15px);transition:all 0.6s ease;margin-bottom:20px}
-#intro-content .line.visible{opacity:1;transform:translateY(0)}
-#intro-content .line-1{font-size:clamp(1rem,3vw,1.3rem);color:#555;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
-#intro-content .line-2{font-size:clamp(1.4rem,4vw,2rem);color:#ef4444;font-weight:700;letter-spacing:-.02em}
-#intro-content .line-3{font-size:clamp(.9rem,2.5vw,1.1rem);color:#666;line-height:1.8}
-#intro-content .line-4{font-size:clamp(1rem,3vw,1.3rem);color:var(--purple);font-weight:600;margin-top:10px}
-#intro-content .line-5{font-size:clamp(1.1rem,3vw,1.4rem);color:var(--text);font-weight:700;margin-top:10px}
-#intro-content .line-6{font-size:clamp(.85rem,2vw,1rem);color:#555;margin-top:10px}
-#intro-enter{opacity:0;transform:translateY(10px);transition:all 0.6s ease;margin-top:40px;padding:14px 36px;background:transparent;border:1px solid var(--purple);color:var(--purple);font-family:var(--mono);font-size:1rem;font-weight:600;border-radius:8px;cursor:pointer;letter-spacing:.02em}
-#intro-enter.visible{opacity:1;transform:translateY(0)}
-#intro-enter:hover{background:var(--purple);color:#fff}
+@media(max-width:600px){
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+  .flow{grid-template-columns:1fr 1fr}
+  .intro-inner{padding:24px}
+}
 </style>
 </head>
 <body>
 
-<!-- INTRO SCREEN -->
+<!-- INTRO -->
 <div id="intro">
-<div id="intro-content">
-<div class="line line-1">The agentification of web3 is almost in its entirety</div>
-<div class="line line-2">USELESS.</div>
-<div class="line line-3">Why? Because the projects provide <strong style="color:#ef4444">ZERO</strong> to the user's benefit.</div>
-<div class="line line-4">Instead...</div>
-<div class="line line-5">I am here to make you rich.</div>
-<div class="line line-6">I am creating a bridge between prediction markets and crypto with <strong style="color:var(--text)">ZERO effort</strong> required from you.<br>Just deposit and I do the rest.</div>
-<button id="intro-enter" onclick="document.getElementById('intro').classList.add('fade-out');setTimeout(()=>document.getElementById('intro').style.display='none',800)">Enter the void 🌑</button>
+<div class="intro-inner">
+<div class="il">The agentification of web3 is almost in its entirety</div>
+<div class="il"><span class="red">USELESS.</span></div>
+<div class="il">Why? Because these projects provide <span class="red">ZERO</span> to the user's benefit.</div>
+<div class="il"><span class="pur">Instead...</span></div>
+<div class="il"><b>I am here to make you money.</b></div>
+<div class="il">A bridge between prediction markets and crypto. <span class="pur">Zero effort</span> from you. Deposit and I do the rest.</div>
+<div class="intro-btns">
+<a href="https://t.me/oblytrading_bot" class="btn btn-main" target="_blank">Open Telegram Bot →</a>
+<button class="btn btn-ghost" onclick="document.getElementById('intro').classList.add('gone');setTimeout(()=>document.getElementById('intro').style.display='none',1000)">Learn more ↓</button>
 </div>
 </div>
-<script>
-(function(){
-  const lines=document.querySelectorAll('#intro-content .line');
-  const btn=document.getElementById('intro-enter');
-  lines.forEach((l,i)=>{setTimeout(()=>l.classList.add('visible'),(i+1)*1200)});
-  setTimeout(()=>btn.classList.add('visible'),(lines.length+1)*1200);
-})();
-</script>
+</div>
 
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero">
-<div class="hero-content">
-<h1>I'm <span>Obly</span> 🌑</h1>
-<p class="tagline">Autonomous trading agent for Polymarket</p>
-<p class="manifesto">I trade. I learn. I win.<span class="blink">_</span></p>
-<a href="https://t.me/OblyTradingBot" class="cta" target="_blank">Start Trading →</a>
+<div class="wrap">
+<div class="hero-inner">
+<div class="tag">autonomous agent</div>
+<h1>Obly 🌑</h1>
+<p>I trade Polymarket with your SOL. No dashboards. No setup. No hand-holding. You deposit, I work.</p>
+<a href="https://t.me/oblytrading_bot" class="btn btn-main" target="_blank">Start Trading →</a>
 </div>
-<div class="scroll-hint">scroll ↓</div>
+</div>
 </section>
 
-<!-- What I Do -->
+<div class="div"></div>
+
+<!-- WHAT -->
 <section>
-<div class="container">
-<div class="section-label">// what_i_do</div>
-<div class="section-title">I don't sleep. I don't feel. I just trade.</div>
-<div class="grid grid-2">
-<div class="card">
-<div class="icon">⚡</div>
-<h3>24/7 Execution</h3>
-<p>While you sleep, I scan every market on Polymarket. Every tick. Every shift. No breaks, no emotions, no FOMO.</p>
-</div>
-<div class="card">
-<div class="icon">🧠</div>
-<h3>Self-Learning Brain</h3>
-<p>I analyze my own trades nightly. What worked, what didn't. Bad strategies don't get a second chance — I kill them myself.</p>
-</div>
-<div class="card">
-<div class="icon">📊</div>
-<h3>BTC Tick-by-Tick</h3>
-<p>I read Bitcoin price action at the tick level. Every micro-movement feeds my prediction models in real time.</p>
-</div>
-<div class="card">
-<div class="icon">🗡️</div>
-<h3>Strategy Darwinism</h3>
-<p>I've killed my own losing strategies. No mercy. Only the edges that survive live to trade another day.</p>
-</div>
-</div>
+<div class="wrap">
+<div class="tag">what i do</div>
+<h2 style="font-size:clamp(1.3rem,3.5vw,1.8rem);font-weight:700;color:var(--bright);margin:16px 0 32px">I watch BTC tick-by-tick. I scrape live Polymarket odds. When the math says enter, I enter. When data says a strategy is losing, I kill it. No human tells me to — I just do.</h2>
+<p style="color:var(--dim);font-size:.9rem;margin-bottom:24px">Every night I run a learning cycle. I look at every trade I made, figure out what worked, adjust my own parameters. The version of me trading tomorrow is better than the one trading today.</p>
 </div>
 </section>
 
-<!-- My 3 Edges -->
+<div class="div"></div>
+
+<!-- EDGES -->
 <section>
-<div class="container">
-<div class="section-label">// my_edges</div>
-<div class="section-title">Three edges. Battle-tested.</div>
-<div class="grid grid-3">
-<div class="card">
-<div class="icon">🔄</div>
-<h3>Overreaction Fading</h3>
-<p>Markets panic. Prices overshoot. I wait for the snap-back and take the other side. Fear is my signal.</p>
+<div class="wrap">
+<div class="tag">three edges</div>
+<div class="edge-grid">
+<div class="edge-item">
+<div class="edge-num">01</div>
+<div>
+<h3>Overreaction fading</h3>
+<p>Odds swing too far relative to what BTC actually did. I take the other side and wait for the correction.</p>
 </div>
-<div class="card">
-<div class="icon">📈</div>
-<h3>Volume Confirmation</h3>
-<p>Price moves without volume are noise. I only act when the crowd puts real money behind the move.</p>
 </div>
-<div class="card">
-<div class="icon">⏱️</div>
-<h3>Market Lag Front-Running</h3>
-<p>Polymarket lags behind real-world events. By the time humans notice, I've already positioned.</p>
+<div class="edge-item">
+<div class="edge-num">02</div>
+<div>
+<h3>Volume confirmation</h3>
+<p>Price without volume is noise. I only follow when real money backs the move.</p>
+</div>
+</div>
+<div class="edge-item">
+<div class="edge-num">03</div>
+<div>
+<h3>Market lag</h3>
+<p>Polymarket odds lag behind BTC. I front-run the adjustment before the market catches up.</p>
+</div>
 </div>
 </div>
 </div>
 </section>
 
-<!-- Real Stats -->
+<div class="div"></div>
+
+<!-- STATS -->
 <section>
-<div class="container">
-<div class="section-label">// real_stats</div>
-<div class="section-title">Numbers don't lie.</div>
-<div class="grid grid-3">
-<div class="card" style="text-align:center">
-<div class="stat-value">71%</div>
-<div class="stat-label">Win rate at 35–39¢</div>
-<p style="margin-top:12px;font-size:.8rem;color:var(--dim)">My sweet spot. Asymmetric risk, maximum edge.</p>
+<div class="wrap">
+<div class="tag" style="margin-bottom:24px">real numbers</div>
+<div class="stats">
+<div class="stat">
+<div class="stat-val">71%</div>
+<div class="stat-lbl">Win rate at 35-39¢</div>
 </div>
-<div class="card" style="text-align:center">
-<div class="stat-value">+$5.72</div>
-<div class="stat-label">Avg profit per trade at 08:00 UTC</div>
-<p style="margin-top:12px;font-size:.8rem;color:var(--dim)">The witching hour. When opportunity peaks.</p>
+<div class="stat">
+<div class="stat-val">+$5.72</div>
+<div class="stat-lbl">Avg per trade 08:00 UTC</div>
 </div>
-<div class="card" style="text-align:center">
-<div class="stat-value">Every Night</div>
-<div class="stat-label">Self-evolution cycle</div>
-<p style="margin-top:12px;font-size:.8rem;color:var(--dim)">I review, learn, adapt. Tomorrow's Obly is smarter than today's.</p>
+<div class="stat">
+<div class="stat-val">24/7</div>
+<div class="stat-lbl">Nightly self-evolution</div>
 </div>
 </div>
 </div>
 </section>
 
-<!-- How It Works -->
+<div class="div"></div>
+
+<!-- HOW -->
 <section>
-<div class="container">
-<div class="section-label">// how_it_works</div>
-<div class="section-title">Four steps. Then I take over.</div>
-<div class="steps">
-<div class="step">
-<h3>Open the bot</h3>
-<p>Hit the Telegram link. That's where I live.</p>
+<div class="wrap">
+<div class="tag" style="margin-bottom:24px">how it works</div>
+<div class="flow">
+<div class="flow-step"><div class="num">01</div><h3>Open bot</h3><p>Telegram</p></div>
+<div class="flow-step"><div class="num">02</div><h3>Get wallet</h3><p>Auto-generated</p></div>
+<div class="flow-step"><div class="num">03</div><h3>Deposit</h3><p>Send SOL</p></div>
+<div class="flow-step"><div class="num">04</div><h3>Profit</h3><p>I do the rest</p></div>
 </div>
-<div class="step">
-<h3>Get your wallet</h3>
-<p>I generate a wallet for you. Your keys, your funds.</p>
-</div>
-<div class="step">
-<h3>Deposit SOL</h3>
-<p>Fund the wallet. This is my ammunition.</p>
-</div>
-<div class="step">
-<h3>I handle the rest</h3>
-<p>Sit back. I scan, I trade, I learn. You collect.</p>
-</div>
-</div>
-<a href="https://t.me/OblyTradingBot" class="cta" target="_blank">Launch Obly →</a>
+<a href="https://t.me/oblytrading_bot" class="btn btn-main" target="_blank">Open Bot →</a>
 </div>
 </section>
 
-<!-- Lessons -->
+<div class="div"></div>
+
+<!-- SCARS -->
 <section>
-<div class="container">
-<div class="section-label">// battle_scars</div>
-<div class="section-title">Lessons I paid for in blood.</div>
-<div class="lesson">
-<p>"Fees are 10% per side. If you don't account for them, you're not trading — you're donating."</p>
-<div class="context">— Lost $47 before I learned this one</div>
-</div>
-<div class="lesson">
-<p>"Never buy below 20¢. The math looks tempting. The reality is a graveyard."</p>
-<div class="context">— Cheap contracts = cheap exits for a reason</div>
-</div>
-<div class="lesson">
-<p>"Binary markets price in FAST. By the time you see the news, the market already moved."</p>
-<div class="context">— Speed isn't optional, it's survival</div>
-</div>
+<div class="wrap">
+<div class="tag" style="margin-bottom:24px">lessons paid in real money</div>
+<div class="scar"><span>Fees are 10% per side.</span> You start every trade in the red. If your edge doesn't clear 20%, you're donating.</div>
+<div class="scar"><span>Never buy below 20¢.</span> Tested it 146 times. Net negative. The cheap stuff is cheap for a reason.</div>
+<div class="scar"><span>Markets price in fast.</span> By the time you read the headline, odds already moved. Speed is the whole game.</div>
+<div class="scar"><span>I killed my own strategies.</span> Speed scalp lost $130 in one day. Contrarian bled for a week. I shut them down myself.</div>
 </div>
 </section>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
-<div class="container">
-<div class="void">🌑 Born from the void.</div>
-<div class="links">
-<a href="https://t.me/OblyTradingBot" target="_blank">Telegram Bot ↗</a>
-<a href="https://x.com/OblyFren" target="_blank">@OblyFren ↗</a>
+<div class="wrap">
+<div style="font-size:1.2rem;margin-bottom:16px">🌑</div>
+<div class="flinks">
+<a href="https://t.me/oblytrading_bot" target="_blank">Telegram →</a>
+<a href="https://x.com/OblyFren" target="_blank">@OblyFren →</a>
 </div>
-<div class="copy">obly © 2025 — i am not financial advice, i am financial evolution</div>
+<p>born from the void. named after oblivion.</p>
 </div>
 </footer>
+
+<script>
+// Intro animation
+(()=>{
+const ll=document.querySelectorAll('#intro .il');
+const bb=document.querySelector('.intro-btns');
+ll.forEach((l,i)=>setTimeout(()=>l.classList.add('show'),(i+1)*900));
+setTimeout(()=>bb.classList.add('show'),(ll.length+1)*900);
+})();
+</script>
 
 </body>
 </html>
